@@ -1,0 +1,14 @@
+body {
+    background-color: #020001;
+    color: white;
+}
+
+.header {
+    border-width: 5px;
+}
+
+.card {
+    background: #020001;
+    color: white;
+}
+
