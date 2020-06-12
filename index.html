@@ -24,17 +24,24 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 px-0">
+            <div class="col-md-8 px-0 img-gradient">
                 <img id="seriesImage" class="img-fluid" alt="Responsive image">
             </div>
         </div>
-        <div class="row px-5">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-has>Seasons</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        <div class="row justify-content-end d-flex px-5">
+            <div class="col-md-auto">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-has></button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+                </div>
+            </div>
+            <div class="col-md-auto">
+                <button id="sortBtn" type="button" class="btn btn-dark" onclick="sortEpisodes()">Faldende</button>
             </div>
         </div>
-        <div class="row row-cols-1 row-cols-md-3 px-4" id="episodes"></div>
+        <div class="card-deck">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" id="episodes"></div>
+        </div>
     </div>
 
 

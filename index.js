@@ -96,7 +96,8 @@ fetch('https://api.ovp.tv2.dk/graphql', {
             genres: data.genres.nodes,
             categories: data.categories.nodes,
             type: data.type[0].toUpperCase() + data.type.slice(1),
-            releaseDate: new Date(data.firstPublicationDate).getFullYear()
+            releaseDate: new Date(data.firstPublicationDate).getFullYear(),
+            currentSeason: data.seasons.nodes[0].title
         };
 
         setBasisInformation(serie);
@@ -114,12 +115,20 @@ function populateDropdown() {
     });
 
     $('.dropdown-item').click(function (e) {
+        $('#dropdownMenuButton').text(e.currentTarget.innerHTML);
         let season = seasonList.filter(s => {
             return s.title === e.currentTarget.innerHTML;
         })[0];
         getEpisodesForSeason(season.id)
     })
 }
+
+function sortEpisodes() {
+
+    $('#sortBtn').text($('#sortBtn').text() == "Faldende" ? "Stigende" : "Faldende");
+    setEpisodes(currentEpisodes.reverse());
+}
+
 
 function getEpisodesForSeason(seasonID) {
     fetch('https://api.ovp.tv2.dk/graphql', {
@@ -150,6 +159,7 @@ function setBasisInformation(serie) {
     }
     $('#type').text(serie.type);
     $('#releaseDate').text(serie.releaseDate);
+    $('#dropdownMenuButton').text(serie.currentSeason);
 }
 
 function setEpisodes(episodes) {
@@ -175,7 +185,7 @@ function createCardsFor($container, episode) {
         src: episode.art,
         class: 'card-img-top'
     }).appendTo(card);
-    let cardOverlay = $('<div>').addClass('card-img-overlay d-flex justify-content-end').appendTo(card);
+    let cardOverlay = $('<div>').addClass('card-img-overlay d-flex justify-content-end episodeNr').appendTo(card);
     let overlayText = $('<p>').text(episode.episodeNr).appendTo(cardOverlay);
     let cardBody = $('<div>').addClass('card-body').appendTo(card);
     let bodyTitle = $('<h5>').text(episode.title).addClass('card-title my-0').appendTo(cardBody);
