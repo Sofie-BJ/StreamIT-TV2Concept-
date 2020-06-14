@@ -8,41 +8,44 @@
     <link rel="stylesheet" href="index.css">
     <title>Stream IT</title>
 </head>
-<body class="">
-    <div class="container-fluid px-0">
-        <div class="row align-items-center">
-            <div class="col-lg-4 px-5">
-                <div class="text-white text-center mt-5 header">
-                    <h1 class="display-4" id="seriesTitle"></h1>
-                    <div class="row justify-content-md-center">
-                        <div class="col-md-auto"><p id="releaseDate"></p></div>
-                        <div class="col-md-auto"><p id="genres"></p></div>
-                        <div class="col-md-auto"><p id="type"></p></div>
-                    </div>
-                    <div class="row justify-content-md-center text-wrap">
+<body class="px-5">
+    <section class="container-fluid mt-5 border border-left-0 border-right-0">
+        <div class="row header justify-content-between align-items-between">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <div id="headingGroup" class="text-white mt-5 d-none d-lg-block">
+                        <h1 class="display-2 mb-0 justify-content-start" id="seriesTitle"></h1>
+                        <div class="row" id="serieInfo">
+                            <div class="col-md-auto"><p id="releaseDate"></p></div>
+                            <div class="col-md-auto"><p id="genres"></p></div>
+                            <div class="col-md-auto"><p id="type"></p></div>
+                        </div>
                         <p id="seriesDescription"></p>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8 px-0 img-gradient">
-                <img id="seriesImage" class="img-fluid" alt="Responsive image">
-            </div>
-        </div>
-        <div class="row justify-content-end d-flex px-5">
-            <div class="col-md-auto">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-has></button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <img id="seriesImage" class="img-fluid" alt="Responsive image">
                 </div>
             </div>
+    </section>
+
+    <section class="py-3 border border-left-0 border-right-0 border-top-0">
+        <div class="row justify-content-between">
+            <div id="seasons" class="row px-5 align-items-center">
+                <h4 class="pt-2">Sæson</h4>
+            </div>
             <div class="col-md-auto">
-                <button id="sortBtn" type="button" class="btn btn-dark" onclick="sortEpisodes()">Faldende</button>
+                <button id="sortBtn" type="button" class="btn border text-white btn-lg justify-content-end" onclick="sortEpisodes()">Faldende</button>
             </div>
         </div>
-        <div class="card-deck">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" id="episodes"></div>
+    </section>
+
+    
+
+      
+        <div class="card-deck mt-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 " id="episodes"></div>
         </div>
-    </div>
+
 
 
 

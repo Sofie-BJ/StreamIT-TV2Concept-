@@ -1,4 +1,4 @@
-let serie = "r7-series-1286";
+let serie = "r7-series-3407";
 
 let serieQuery = `
 query Serie($serie: String!) {
@@ -91,7 +91,7 @@ fetch('https://api.ovp.tv2.dk/graphql', {
 
         serie = {
             imageUrl: data.art.nodes[0].url,
-            title: data.presentationTitle,
+            title: data.presentationTitle.toUpperCase(),
             desp: data.synopsis,
             genres: data.genres.nodes,
             categories: data.categories.nodes,
@@ -105,30 +105,38 @@ fetch('https://api.ovp.tv2.dk/graphql', {
 
         currentEpisodes = data.episodesInSeason.nodes[0].episodes.nodes;
         seasonList = data.seasons.nodes;
+        seasonButtons(seasonList);
 
-        populateDropdown()
     });
 
 function populateDropdown() {
     seasonList.forEach(s => {
         let element = $('<button>').text(s.title).addClass('dropdown-item').appendTo('.dropdown-menu')
     });
+}
 
-    $('.dropdown-item').click(function (e) {
-        $('#dropdownMenuButton').text(e.currentTarget.innerHTML);
+function seasonButtons(seasonList) {
+    $('seasons').empty();
+    seasonList.forEach(s => {
+        console.log(s.title.split(" "));
+
+        let element = $('<div>').addClass('col').appendTo($('#seasons'));
+        let button = $('<button>').text(s.title.split(" ")[1]).addClass('btn btn-lg border text-white seasonSelector').appendTo(element);
+    });
+
+    $('.seasonSelector').click(function (e) {
+        $('.button').text(e.currentTarget.innerHTML);
         let season = seasonList.filter(s => {
-            return s.title === e.currentTarget.innerHTML;
+            return s.title.split(" ")[1] === e.currentTarget.innerHTML;
         })[0];
         getEpisodesForSeason(season.id)
     })
 }
 
 function sortEpisodes() {
-
     $('#sortBtn').text($('#sortBtn').text() == "Faldende" ? "Stigende" : "Faldende");
     setEpisodes(currentEpisodes.reverse());
 }
-
 
 function getEpisodesForSeason(seasonID) {
     fetch('https://api.ovp.tv2.dk/graphql', {
